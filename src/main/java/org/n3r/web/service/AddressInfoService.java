@@ -17,4 +17,8 @@ public class AddressInfoService extends BaseServiceImpl<AddressInfo, String> {
     public List<AddressInfo> findAllAddressInfo() {
         return new Esql().select("findAllAddressInfo").returnType(AddressInfo.class).execute();
     }
+
+    public List<AddressInfo> findAddressInfo(AddressInfo addressInfo) {
+        return new Esql().select("findAddressInfo").returnType(AddressInfo.class).params(addressInfo).execute();
+    }
 }

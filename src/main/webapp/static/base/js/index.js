@@ -1,4 +1,10 @@
 $(function () {
+
+    $("#addButton").click(function () {
+        window.location.href = "add_input";
+    });
+
+
     // validate signup form on keyup and submit
     var $addForm = $("#addForm");
 
@@ -10,16 +16,14 @@ $(function () {
 
     // post-submit callback
     function showResponse(responseText, statusText, xhr, $form) {
-        if (responseText.status === "success") {
-        } else {
-        }
+        $.message({type: responseText.status, content: responseText.message});
     }
 
     $("#addForm").validate({
         rules: {
             name: {
                 required: true,
-                minlength: 4
+                minlength: 2
             },
             email: {
                 required: true,
@@ -27,7 +31,7 @@ $(function () {
                 minlength: 4
             },
             phone: {
-                required: true,
+                required: true
             }
         },
         onfocusout: function (element, event) {
@@ -57,7 +61,7 @@ $(function () {
             }
         },
         submitHandler: function () {
-            $addForm.ajaxSubmit(options);
+            $addForm.submit();
         }
     });
 })

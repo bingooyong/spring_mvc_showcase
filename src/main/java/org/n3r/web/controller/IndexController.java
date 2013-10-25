@@ -8,38 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController {
 
     @RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
-    @Resource
-    AddressInfoService addressInfoService;
 
-    @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String index(Model model, AddressInfo addressInfo) {
-        model.addAttribute("pages", addressInfoService.findAllAddressInfo());
-        return "index";
-    }
-
-    @RequestMapping(value = "add_input", method = RequestMethod.GET)
-    public String add(Model model) {
-        return "add_input";
-    }
-
-    @RequestMapping(value = "add_save", method = RequestMethod.POST)
-    public String addSave(Model model, AddressInfo addressInfo) {
-        addressInfoService.save(addressInfo);
-        return "add_save";
-    }
-
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    public String search(Model model, AddressInfo addressInfo) {
-        return "index";
-    }
 
 }

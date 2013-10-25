@@ -7,7 +7,9 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.n3r.core.lang.RClose;
 import org.n3r.esql.Esql;
+import org.n3r.esql.EsqlTran;
 import org.n3r.web.common.utils.UUIDUtils;
 import org.n3r.web.entity.BaseEntity;
 import org.n3r.web.service.BaseService;
@@ -80,9 +82,29 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
 
     @Override
     public void delete(PK id) {
+        Assert.notNull(id, "id is required");
+        new Esql().useSqlFile(getClass())
+                .update("onDelete" + entityClass.getSimpleName())
+                .params(id).execute();
     }
 
     @Override
     public void delete(PK[] ids) {
+        Assert.notEmpty(ids, "ids must not be empty");
+        Esql esql = new Esql().useSqlFile(getClass());
+        EsqlTran tran = esql.newTran();
+        try {
+            tran.start();
+            for (PK id : ids) {
+                esql.update("onDelete" + entityClass.getSimpleName()).params(id).execute();
+            }
+            tran.commit();
+        } catch (Exception ex) {
+            tran.rollback();
+            Throwables.propagate(ex);
+        } finally {
+            RClose.closeQuietly(tran);
+        }
+
     }
 }

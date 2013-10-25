@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head th:include="fragment/common :: headerFragment">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"
+          th:href="@{/static/css/bootstrap-responsive.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
+          th:href="@{/static/base/css/base.css}"/>
+</head>
+<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"/>
+<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"/>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" th:include="fragment/common :: sidebarFragment"></div>
+        <!--/span-->
+        <div class="span9">
+            <form id="addForm" class="form-horizontal" method="post" action="#"
+                  th:object="${addressInfo}"
+                  th:attr="action=@{/add_save}">
+                <!--validator error info-->
+                <div class="row" th:if="${#fields.hasErrors('*')}">
+                    <div class="alert fade in">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <ul>
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row well">
+                    <div class="span5 offset2">
+
+                        <div class="control-group">
+                            <label class="control-label" for="inputName">姓名</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputName" name="name" placeholder="姓名"
+                                       th:field="*{name}"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputEmail">Email</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputEmail" th:field="*{email}" name="email"
+                                       placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPhone">手机号码</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputPhone" name="phone" th:field="*{phone}" placeholder="手机号码"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn btn-primary" data-loading-text="提交..."
+                                        id="addSubmitButton">提交
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-fluid-->
+    <div th:include="fragment/common :: [//footer]"></div>
+</div>
+<!--/.fluid-container-->
+</body>
+</html>

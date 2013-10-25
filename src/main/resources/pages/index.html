@@ -10,145 +10,81 @@
 </head>
 <script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"/>
 <script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"/>
-<style type="text/css">
-    body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-    }
-
-    .sidebar-nav {
-        padding: 9px 0;
-    }
-
-    @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-            float: none;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-    }
-</style>
-<script>
-    $(function () {
-        $("#addButton").click(function () {
-
-        });
-    });
-</script>
 <body>
-
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Project name</a>
-
-            <div class="nav-collapse collapse">
-                <p class="navbar-text pull-right">
-                    Logged in as <a href="#" class="navbar-link">Username</a>
-                </p>
-                <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
-        </div>
-    </div>
-</div>
-
-
+<div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
-            <div class="well sidebar-nav">
-                <ul class="nav nav-list">
-                    <li class="nav-header">Sidebar</li>
-                    <li class="active"><a href="#" th:attr="href=@{/index}">联系方式</a></li>
-                </ul>
-            </div>
-            <!--/.well -->
-        </div>
+        <div class="span3" th:include="fragment/common :: sidebarFragment"></div>
         <!--/span-->
         <div class="span9">
-            <div class="row well">
-                <div class="span5 offset2">
-                    <form id="addForm" class="form-horizontal" method="post" action="#" th:attr="action=@{/add_save}">
-                        <div class="control-group">
-                            <label class="control-label" for="inputName">姓名</label>
-
-                            <div class="controls">
-                                <input type="text" id="inputName" name="name" placeholder="姓名"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="inputEmail">Email</label>
-
-                            <div class="controls">
-                                <input type="text" id="inputEmail" name="email"
-                                       placeholder="Email"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="inputPhone">手机号码</label>
-
-                            <div class="controls">
-                                <input type="text" id="inputPhone" name="phone" placeholder="手机号码"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <div class="controls">
-                                <button type="submit" class="btn" id="addButton">新增</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
+            <div class="row" id="listForm">
                 <div class="span12">
-                    <form class="form-inline" method="post">
-                        <input type="text" class="input-small" placeholder="姓名"/>
-                        <input type="text" class="input-small" placeholder="Email"/>
-                        <input type="text" class="input-small" placeholder="手机号码"/>
-                        <button type="submit" class="btn">搜索</button>
-                    </form>
+                    <div class="span5">
+                        <form class="form-inline" method="post" action="#" th:object="${addressInfo}"
+                              th:attr="action=@{/search}">
+                            <input type="text" class="input-small" th:field="*{name}" placeholder="姓名" name="name"/>
+                            <input type="text" class="input-small" th:field="*{email}" placeholder="Email"
+                                   name="email"/>
+                            <input type="text" class="input-small" th:field="*{phone}" placeholder="手机号码"
+                                   name="phone"/>
+                            <button type="submit" class="btn" id="searchButton">搜索</button>
+                        </form>
+                    </div>
+                    <div class="span1 offset5">
+                        <button type="button" class="btn" id="addButton">新增</button>
+                    </div>
                 </div>
                 <div class="span12">
-                    <table class="table">
+                    <table class="table" id="listTable">
                         <thead>
                         <tr>
-                            <th class="center middle">操作</th>
+                            <th class="center middle"><input type="checkbox" class="allCheck"/></th>
                             <th class="center middle">姓名</th>
                             <th class="center middle">邮箱</th>
                             <th class="center middle">手机号码</th>
+                            <th class="center middle">操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="addressInfo : ${pages}">
-                            <td class="center middle"><input type="checkbox" value="" th:value="${addressInfo.id}"/>
+                            <td class="center middle">
+                                <input type="checkbox" name="ids" value="" th:value="${addressInfo.id}"/>
                             </td>
                             <td class="center middle" th:text="${addressInfo.name}">Michael Jackson</td>
                             <td class="center middle" th:text="${addressInfo.email}">1@1.com</td>
                             <td class="center middle" th:text="${addressInfo.phone}">186xxxx2514</td>
+                            <td class="center middle">
+                                <button class="btn btn-link editButton">编辑</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                     <!--/table-->
+
+                    <div class="pagerBar">
+                        <div class="delete">
+                            <input type="button" id="deleteButton" class="btn"
+                                   th:attr="url=@{/del}" value="删 除" disabled="disabled"/>
+                        </div>
+                        <div class="pager">
+
+                            <span id="pager"></span>
+                            <input type="hidden" name="pageNumber" id="pageNumber" value="${pager.pageNumber}"/>
+                            <input type="hidden" name="orderBy" id="orderBy" value="${pager.orderBy}"/>
+                            <input type="hidden" name="order" id="order" value="${pager.order}"/>
+                        </div>
+                    </div>
                 </div>
+                <!--/span-->
             </div>
+            <!--/row-->
         </div>
         <!--/span-->
+
     </div>
-    <!--/row-->
+    <!--/row-fluid-->
     <div th:include="fragment/common :: [//footer]"></div>
 </div>
 <!--/.fluid-container-->
-
 </body>
 </html>

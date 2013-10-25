@@ -1,3 +1,9 @@
+[onSaveAddressInfo]
+INSERT INTO MVC_ADDRESS_INFO (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);
+
+[onDeleteAddressInfo]
+DELETE MVC_ADDRESS_INFO WHERE ID = ##;
+
 [findAddressInfo]
 SELECT
   id,
@@ -5,7 +11,13 @@ SELECT
   email,
   phone
 FROM mvc_address_info
-WHERE id = ##;
+WHERE 1 = 1
+<#dynamic>
+  <#if id?has_content>   and id = #id#</#if>
+  <#if name?has_content> and name  LIKE '%'||#name#||'%'</#if>
+  <#if email?has_content>and email LIKE '%'||#email#||'%'</#if>
+  <#if phone?has_content>and phone LIKE '%'||#phone#||'%'</#if>
+</#dynamic>
 
 [findAllAddressInfo]
 SELECT
@@ -14,7 +26,3 @@ SELECT
   email,
   phone
 FROM mvc_address_info;
-
-
-[onSaveAddressInfo]
-INSERT INTO MVC_ADDRESS_INFO (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);
