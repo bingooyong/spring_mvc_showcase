@@ -1,0 +1,16 @@
+[findAddressInfo]
+SELECT
+  id,
+  name,
+  email,
+  phone
+FROM mvc_address_info
+WHERE id = ##
+
+[findAllAddressInfo]
+SELECT
+  id,
+  name,
+  email,
+  phone
+FROM mvc_address_info

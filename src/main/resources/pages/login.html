@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head th:include="fragment/common :: headerFragment">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" href="../static/base/css/base.css"
+          th:href="@{/static/base/css/base.css}"/>
+</head>
+<body>
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="span4 offset4">
+        <h1>Authentication</h1>
+
+        <form action="authentication" th:action="@{/authentication}" method="post" class="well">
+            <fieldset>
+                <label>Login :</label>
+                <input id="j_username" name="j_username"
+                       type="text" required="required" autofocus="autofocus" class="input span3"
+                       placeholder="Your login..."/>
+                <label>Password :</label>
+                <input id="j_password" name="j_password"
+                       type="password" required="required" class="input span3"
+                       placeholder="Your password..."/>
+            </fieldset>
+            <button type="submit" class="btn btn-success">Authenticate</button>
+        </form>
+    </div>
+    <div th:include="fragment/common :: [//footer]"></div>
+</div>
+</body>
+</html>

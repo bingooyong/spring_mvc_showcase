@@ -1,0 +1,11 @@
+[findAdmin]
+SELECT
+  username,
+  password,
+  name,
+  is_account_locked      isAccountLocked,
+  is_account_enabled     isAccountEnabled,
+  is_account_expired     isAccountExpired,
+  is_credentials_expired isCredentialsExpired
+FROM MVC_ADMIN
+WHERE lower(username) = lower(##)
