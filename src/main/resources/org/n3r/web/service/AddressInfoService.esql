@@ -5,7 +5,7 @@ SELECT
   email,
   phone
 FROM mvc_address_info
-WHERE id = ##
+WHERE id = ##;
 
 [findAllAddressInfo]
 SELECT
@@ -13,4 +13,8 @@ SELECT
   name,
   email,
   phone
-FROM mvc_address_info
+FROM mvc_address_info;
+
+
+[onSaveAddressInfo]
+INSERT INTO MVC_ADDRESS_INFO (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);

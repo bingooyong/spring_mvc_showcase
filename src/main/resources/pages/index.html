@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head th:include="fragment/common :: headerFragment">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css"
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
           th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"
+          th:href="@{/static/css/bootstrap-responsive.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
+          th:href="@{/static/base/css/base.css}"/>
 </head>
-
+<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"/>
+<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"/>
 <style type="text/css">
     body {
         padding-top: 60px;
@@ -24,6 +29,13 @@
         }
     }
 </style>
+<script>
+    $(function () {
+        $("#addButton").click(function () {
+
+        });
+    });
+</script>
 <body>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -58,53 +70,78 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header">Sidebar</li>
-                    <li class="active"><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="nav-header">Sidebar</li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
+                    <li class="active"><a href="#" th:attr="href=@{/index}">联系方式</a></li>
                 </ul>
             </div>
             <!--/.well -->
         </div>
         <!--/span-->
         <div class="span9">
-            <div class="">
-                <form class="form-inline" method="post">
-                    <input type="text" class="input-small" placeholder="姓名"/>
-                    <input type="text" class="input-small" placeholder="Email"/>
-                    <input type="text" class="input-small" placeholder="手机号码"/>
-                    <button type="submit" class="btn">搜索</button>
-                </form>
-            </div>
+            <div class="row well">
+                <div class="span5 offset2">
+                    <form id="addForm" class="form-horizontal" method="post" action="#" th:attr="action=@{/add_save}">
+                        <div class="control-group">
+                            <label class="control-label" for="inputName">姓名</label>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>邮箱</th>
-                    <th>手机号码</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="artist,rowStat : ${pages}">
-                    <td class="center middle" th:text="${rowStat.username}">Michael Jackson</td>
-                    <td class="center middle" th:text="${rowStat.email}">1@1.com</td>
-                    <td class="center middle" th:text="${rowStat.phone}">186xxxx2514</td>
-                </tr>
-                </tbody>
-            </table>
-            <!--/table-->
+                            <div class="controls">
+                                <input type="text" id="inputName" name="name" placeholder="姓名"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputEmail">Email</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputEmail" name="email"
+                                       placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPhone">手机号码</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputPhone" name="phone" placeholder="手机号码"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button type="submit" class="btn" id="addButton">新增</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <form class="form-inline" method="post">
+                        <input type="text" class="input-small" placeholder="姓名"/>
+                        <input type="text" class="input-small" placeholder="Email"/>
+                        <input type="text" class="input-small" placeholder="手机号码"/>
+                        <button type="submit" class="btn">搜索</button>
+                    </form>
+                </div>
+                <div class="span12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="center middle">操作</th>
+                            <th class="center middle">姓名</th>
+                            <th class="center middle">邮箱</th>
+                            <th class="center middle">手机号码</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="addressInfo : ${pages}">
+                            <td class="center middle"><input type="checkbox" value="" th:value="${addressInfo.id}"/>
+                            </td>
+                            <td class="center middle" th:text="${addressInfo.name}">Michael Jackson</td>
+                            <td class="center middle" th:text="${addressInfo.email}">1@1.com</td>
+                            <td class="center middle" th:text="${addressInfo.phone}">186xxxx2514</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--/table-->
+                </div>
+            </div>
         </div>
         <!--/span-->
     </div>

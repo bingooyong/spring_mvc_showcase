@@ -1,6 +1,6 @@
 package org.n3r.web.entity;
 
-public class AddressInfo {
+public class AddressInfo extends BaseEntity {
 
     private String id;
     private String name;

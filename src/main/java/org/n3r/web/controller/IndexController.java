@@ -31,8 +31,9 @@ public class IndexController {
         return "add_input";
     }
 
-    @RequestMapping(value = "add_save", method = RequestMethod.GET)
-    public String addSave(Model model) {
+    @RequestMapping(value = "add_save", method = RequestMethod.POST)
+    public String addSave(Model model, AddressInfo addressInfo) {
+        addressInfoService.save(addressInfo);
         return "add_save";
     }
 

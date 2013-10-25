@@ -1,3 +1,6 @@
+@import url('../../bootstrap/css/bootstrap.min.css');
+@import url('../..                            ccc /bootstrap/css/bootstrap-responsive.min.css');
+
 .center {
     text-align: center !important;
 }
@@ -25,4 +28,19 @@
     text-align: center;
     position: fixed;
     bottom: 0;
+}
+
+label.valid {
+    width: 24px;
+    height: 24px;
+    background: url(../img/valid.png) center center no-repeat;
+    display: inline-block;
+    text-indent: -9999px;
+}
+
+label.error {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
 }
