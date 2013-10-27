@@ -14,14 +14,6 @@ public interface BaseService<T, PK extends Serializable> {
     public T get(PK id);
 
     /**
-     * 根据ID获取实体对象
-     *
-     * @param id 记录ID
-     * @return 实体对象
-     */
-    public T load(PK id);
-
-    /**
      * 获取所有实体对象集合
      *
      * @return 实体对象集合

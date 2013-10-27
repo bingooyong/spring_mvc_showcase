@@ -9,6 +9,8 @@ public class BaseEntity implements Serializable {
     public static final String MODIFY_DATE_PROPERTY_NAME = "modifyDate";// "修改日期"属性名称
     public static final String ON_SAVE_METHOD_NAME = "onSave";// "保存"方法名称
     public static final String ON_UPDATE_METHOD_NAME = "onUpdate";// "更新"方法名称
+    public static final String ON_DELETE_METHOD_NAME = "onDelete";// "删除"方法名称
+    public static final String ON_GET_METHOD_NAME = "onGet";// "查询"方法名称
 
     protected String id;// ID
     protected Date createDate;// 创建日期

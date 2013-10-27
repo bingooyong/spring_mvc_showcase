@@ -76,6 +76,12 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring3</artifactId>
             <version>2.0.18</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -95,8 +101,13 @@
             <groupId>org.n3r</groupId>
             <artifactId>ec-roc</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
 
         <!-- Validator -->
         <dependency>
@@ -110,6 +121,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>4.2.0.Final</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -124,12 +141,49 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <webappDirectory>${basedir}/src/main/webapp</webappDirectory>
+                    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}/src/main/webapp/WEB-INF/</directory>
+                            <includes>
+                                <include>classes/**</include>
+                                <include>lib/**</include>
+                            </includes>
+                        </fileset>
+
+                        <fileset>
+                            <directory>${basedir}/src/main/webapp</directory>
+                            <includes>
+                                <include>.svn</include>
+                                <include>WEB-INF/.svn</include>
+                                <include>META-INF/.svn</include>
+                            </includes>
+                        </fileset>
+
+                    </filesets>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>

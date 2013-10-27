@@ -1,5 +1,19 @@
+[onGetAddressInfo]
+SELECT
+  id,
+  name,
+  email,
+  phone
+FROM mvc_address_info
+WHERE id = ##
+
 [onSaveAddressInfo]
 INSERT INTO MVC_ADDRESS_INFO (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);
+
+[onUpdateAddressInfo]
+UPDATE MVC_ADDRESS_INFO
+SET name = #name#, email = #email#, phone = #phone#
+WHERE id = #id#
 
 [onDeleteAddressInfo]
 DELETE MVC_ADDRESS_INFO WHERE ID = ##;

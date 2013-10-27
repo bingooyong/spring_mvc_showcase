@@ -3,7 +3,6 @@ package org.n3r.web.controller;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.StringUtils;
 import org.n3r.web.entity.AddressInfo;
 import org.n3r.web.service.AddressInfoService;
 import org.springframework.stereotype.Controller;
@@ -20,14 +19,19 @@ public class AddressInfoController extends BaseController {
     @Resource
     AddressInfoService addressInfoService;
 
-    @RequestMapping(value = { "add_input", "edit_input/{id}" }, method = RequestMethod.GET)
-    public String add(Model model, AddressInfo addressInfo, @PathVariable String id) {
-        if (StringUtils.isNotEmpty(id))
-            addressInfo = addressInfoService.get(id);
+    @RequestMapping(value = "/add_input", method = RequestMethod.GET)
+    public String addInput(Model model, AddressInfo addressInfo) {
         return "add_input";
     }
 
-    @RequestMapping(value = "add_save", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit_input/{id}", method = RequestMethod.GET)
+    public String editInput(Model model, @PathVariable String id) {
+        model.addAttribute("addressInfo", addressInfoService.get(id));
+        model.addAttribute("isEditInput", true);
+        return "add_input";
+    }
+
+    @RequestMapping(value = "/add_save", method = RequestMethod.POST)
     public String addSave(Model model, @Valid AddressInfo addressInfo, BindingResult result) {
         if (result.hasErrors())
             return "add_input";
@@ -36,7 +40,17 @@ public class AddressInfoController extends BaseController {
         return "index";
     }
 
-    @RequestMapping(value = { "index", "search" }, method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/edit_save", method = RequestMethod.POST)
+    public String editSave(Model model, @Valid AddressInfo addressInfo, BindingResult result) {
+        model.addAttribute("isEditInput", true);
+        if (result.hasErrors())
+            return "add_input";
+        addressInfoService.update(addressInfo);
+        model.addAttribute("pages", addressInfoService.findAddressInfo(addressInfo));
+        return "index";
+    }
+
+    @RequestMapping(value = { "/index", "/search" }, method = { RequestMethod.GET, RequestMethod.POST })
     public String search(Model model, AddressInfo addressInfo) {
         model.addAttribute("pages", addressInfoService.findAddressInfo(addressInfo));
         return "index";

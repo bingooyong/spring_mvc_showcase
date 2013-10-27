@@ -19,7 +19,7 @@
         <div class="span9">
             <form id="addForm" class="form-horizontal" method="post" action="#"
                   th:object="${addressInfo}"
-                  th:attr="action=@{/add_save}">
+                  th:attr="action=@{${isEditInput} ? '/edit_save' : '/add_save'}">
                 <!--validator error info-->
                 <div class="row" th:if="${#fields.hasErrors('*')}">
                     <div class="alert fade in">
@@ -31,6 +31,8 @@
                 </div>
                 <div class="row well">
                     <div class="span5 offset2">
+
+                        <input type="hidden" name="id" th:field="*{id}" />
 
                         <div class="control-group">
                             <label class="control-label" for="inputName">姓名</label>

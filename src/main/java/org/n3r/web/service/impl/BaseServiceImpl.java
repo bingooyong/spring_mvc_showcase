@@ -11,6 +11,7 @@ import org.n3r.core.lang.RClose;
 import org.n3r.esql.Esql;
 import org.n3r.esql.EsqlTran;
 import org.n3r.web.common.utils.UUIDUtils;
+import org.n3r.web.entity.AddressInfo;
 import org.n3r.web.entity.BaseEntity;
 import org.n3r.web.service.BaseService;
 import org.springframework.util.Assert;
@@ -33,12 +34,11 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     @Override
     public T get(PK id) {
         Assert.notNull(id, "id is required");
-        return null;
-    }
-
-    @Override
-    public T load(PK id) {
-        return null;
+        return new Esql().useSqlFile(getClass())
+                .selectFirst(BaseEntity.ON_GET_METHOD_NAME + entityClass.getSimpleName())
+                .params(id)
+                .returnType(AddressInfo.class)
+                .execute();
     }
 
     @Override
@@ -74,6 +74,10 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
 
     @Override
     public void update(T entity) {
+        new Esql().useSqlFile(getClass())
+                .update(BaseEntity.ON_UPDATE_METHOD_NAME + entity.getClass().getSimpleName())
+                .params(entity).execute();
+
     }
 
     @Override
@@ -84,7 +88,7 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     public void delete(PK id) {
         Assert.notNull(id, "id is required");
         new Esql().useSqlFile(getClass())
-                .update("onDelete" + entityClass.getSimpleName())
+                .update(BaseEntity.ON_DELETE_METHOD_NAME + entityClass.getSimpleName())
                 .params(id).execute();
     }
 
@@ -96,7 +100,7 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
         try {
             tran.start();
             for (PK id : ids) {
-                esql.update("onDelete" + entityClass.getSimpleName()).params(id).execute();
+                esql.update(BaseEntity.ON_DELETE_METHOD_NAME + entityClass.getSimpleName()).params(id).execute();
             }
             tran.commit();
         } catch (Exception ex) {
