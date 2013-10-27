@@ -1,24 +1,7 @@
 $(function () {
-
     $("#addButton").click(function () {
         window.location.href = "add_input";
     });
-
-
-    // validate signup form on keyup and submit
-    var $addForm = $("#addForm");
-
-
-    var options = {
-        success: showResponse,
-        timeout: 3000
-    };
-
-    // post-submit callback
-    function showResponse(responseText, statusText, xhr, $form) {
-        $.message({type: responseText.status, content: responseText.message});
-    }
-
     $("#addForm").validate({
         rules: {
             name: {
@@ -59,9 +42,6 @@ $(function () {
             phone: {
                 required: "施舍个手机号吧"
             }
-        },
-        submitHandler: function () {
-            $addForm.submit();
         }
     });
 })
