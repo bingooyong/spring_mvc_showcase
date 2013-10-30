@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head th:include="fragment/common :: headerFragment">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"
+          th:href="@{/static/css/bootstrap-responsive.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
+          th:href="@{/static/base/css/base.css}"/>
+</head>
+<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"></script>
+<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"></script>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" th:include="fragment/common :: sidebarFragment"></div>
+        <!--/span-->
+        <div class="span9">
+        </div>
+        <!--/span-->
+
+    </div>
+    <!--/row-fluid-->
+    <div th:include="fragment/common :: [//footer]"></div>
+</div>
+<!--/.fluid-container-->
+</body>
+</html>

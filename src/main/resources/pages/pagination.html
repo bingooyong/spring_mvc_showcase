@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head th:include="fragment/common :: headerFragment">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/css/bootstrap-responsive.css"
+          th:href="@{/static/css/bootstrap-responsive.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
+          th:href="@{/static/base/css/base.css}"/>
+</head>
+<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"></script>
+<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"></script>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" th:with="isPagination='true'" th:include="fragment/common :: sidebarFragment"></div>
+        <!--/span-->
+        <div class="span9">
+            <div>
+                <div class="row-fluid" layout:fragment="content">
+                    <div class="span12">
+                        <h3>Pipelining data for paging</h3>
+                        <br/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <form class="form-inline">
+                            <fieldset>
+                                <legend>Search form</legend>
+                                <div id="nameFilter" class="span2"></div>
+                                <div id="emailFilter" class="span2 offset1"></div>
+                                <div id="phoneFilter" class="span2 offset1"></div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <table id="listTable"
+                       dt:table="true" dt:url="@{/pagination}"
+                       dt:theme="bootstrap2" class="table table-striped"
+                       dt:serverside="true"
+                       dt:processing="true">
+                    <thead>
+                    <tr>
+                        <th dt:property="'id'">Id</th>
+                        <th dt:property="'name'"  dt:filterable="true" dt:selector="'#nameFilter'">姓名</th>
+                        <th dt:property="'email'" dt:filterable="true" dt:selector="'#emailFilter'">邮箱</th>
+                        <th dt:property="'phone'" dt:filterable="true" dt:selector="'#phoneFilter'">联系电话</th>
+                    </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+        <!--/span-->
+
+    </div>
+    <!--/row-fluid-->
+    <div th:include="fragment/common :: [//footer]"></div>
+</div>
+<!--/.fluid-container-->
+</body>
+</html>

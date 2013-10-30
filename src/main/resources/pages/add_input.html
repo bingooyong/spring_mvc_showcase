@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragment/common :: headerFragment">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
           th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
           th:href="@{/static/base/css/base.css}"/>
 </head>
-<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"/>
-<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"/>
+<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"></script>
+<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"></script>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
 <div class="container-fluid">
@@ -32,7 +32,7 @@
                 <div class="row well">
                     <div class="span5 offset2">
 
-                        <input type="hidden" name="id" th:field="*{id}" />
+                        <input type="hidden" name="id" th:field="*{id}"/>
 
                         <div class="control-group">
                             <label class="control-label" for="inputName">姓名</label>

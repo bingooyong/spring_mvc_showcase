@@ -7,5 +7,5 @@ SELECT
   is_account_enabled     isAccountEnabled,
   is_account_expired     isAccountExpired,
   is_credentials_expired isCredentialsExpired
-FROM MVC_ADMIN
+FROM mvc_admin
 WHERE lower(username) = lower(##)

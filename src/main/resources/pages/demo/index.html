@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap-responsive.min.css}"/>
+</head>
+
+<body>
+
+<p th:text="${today}">Welcome to our grocery store!</p>
+
+
+<div th:object="${user}">
+    <p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+
+    <p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+
+    <p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+</div>
+
+
+<div>
+    <p>Name: <span th:text="${user.firstName}">Sebastian</span>.</p>
+
+    <p>Surname: <span th:text="${user.lastName}">Pepper</span>.</p>
+
+    <p>Nationality: <span th:text="${user.nationality}">Saturn</span>.</p>
+</div>
+
+
+<a href="details.html" th:href="@{http://localhost:8080/gtvg/order/details(firstName=${user.firstName})}">view</a>
+<a href="details.html" th:href="@{/order/details(firstName=${user.firstName})}">view</a>
+<a th:href="@{${user.nationality}(orderId=${user.firstName})}">view</a>
+<a th:href="@{'/details/'+${user.lastName}(orderId=${user.firstName})}">view</a>
+
+
+<a href="http://localhost:8080/gtvg/order/details?firstName=lv">view</a>
+<a href="/mvc/order/details?firstName=lv">view</a>
+<a href="test?orderId=lv">view</a>
+<a href="/mvc/details/yong?orderId=lv">view</a>
+
+</body>
+
+</html>

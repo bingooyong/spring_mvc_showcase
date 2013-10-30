@@ -22,10 +22,19 @@
     <context:annotation-config/>
     <!-- 把标记了@Controller注解的类转换为bean -->
     <context:component-scan base-package="org.n3r.web"/>
-    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 请求映射 -->
 
-    <mvc:annotation-driven/>
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <!-- Turn off working out content type based on URL file extension, should fall back to looking at the Accept headers -->
+        <property name="favorPathExtension" value="false"/>
+    </bean>
+
     <mvc:resources location="/static/" mapping="/static/**"/>
+
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:argument-resolvers>
+            <bean class="com.github.dandelion.datatables.extras.spring3.ajax.DatatablesCriteriasMethodArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
 
     <bean id="httpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
         <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
@@ -44,5 +53,6 @@
         <property name="cacheSeconds" value="0"/>
         <!--  NO CACHE  -->
     </bean>
+
 
 </beans>

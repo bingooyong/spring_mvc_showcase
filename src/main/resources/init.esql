@@ -1,15 +1,15 @@
-CREATE TABLE IF NOT EXISTS MVC_ADMIN (
+CREATE TABLE IF NOT EXISTS `MVC_ADMIN` (
   `id`                     VARCHAR(255) NOT NULL,
-  `create_date`            TIMESTAMP DEFAULT NULL,
-  `modify_date`            TIMESTAMP DEFAULT NULL,
+  `create_date`            TIMESTAMP,
+  `modify_date`            TIMESTAMP,
   `department`             VARCHAR(255) DEFAULT NULL,
   `email`                  VARCHAR(255) NOT NULL,
   `is_account_enabled`     BOOLEAN      NOT NULL,
   `is_account_expired`     BOOLEAN      NOT NULL,
   `is_account_locked`      BOOLEAN      NOT NULL,
   `is_credentials_expired` BOOLEAN      NOT NULL,
-  `locked_date`            TIMESTAMP DEFAULT NULL,
-  `login_date`             TIMESTAMP DEFAULT NULL,
+  `locked_date`            TIMESTAMP,
+  `login_date`             TIMESTAMP,
   `login_failure_count`    INT(11)      NOT NULL,
   `login_ip`               VARCHAR(255) DEFAULT NULL,
   `name`                   VARCHAR(255) DEFAULT NULL,
@@ -20,9 +20,14 @@ CREATE TABLE IF NOT EXISTS MVC_ADMIN (
 );
 
 
-INSERT INTO MVC_ADMIN (ID, USERNAME, PASSWORD, EMAIL, IS_ACCOUNT_ENABLED, IS_ACCOUNT_EXPIRED, IS_ACCOUNT_LOCKED, IS_CREDENTIALS_EXPIRED, LOGIN_FAILURE_COUNT)
+INSERT INTO `MVC_ADMIN` (ID, USERNAME, PASSWORD, EMAIL, IS_ACCOUNT_ENABLED, IS_ACCOUNT_EXPIRED, IS_ACCOUNT_LOCKED, IS_CREDENTIALS_EXPIRED, LOGIN_FAILURE_COUNT)
   VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1@1.com', 1, 0, 0, 0, 0);
 
 
-CREATE TABLE MVC_ADDRESS_INFO (ID   VARCHAR(255) PRIMARY KEY,
-                               NAME VARCHAR(255), EMAIL VARCHAR(255), PHONE VARCHAR(11));
+CREATE TABLE IF NOT EXISTS `mvc_address_infos` (
+  `id`    VARCHAR(255) NOT NULL,
+  `name`  VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(11)  NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE =InnoDB DEFAULT CHARSET = utf8;

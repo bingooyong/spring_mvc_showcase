@@ -1,10 +1,14 @@
 package org.n3r.web.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.n3r.web.entity.AddressInfo;
 import org.n3r.web.service.AddressInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.dandelion.datatables.core.ajax.DataSet;
+import com.github.dandelion.datatables.core.ajax.DatatablesCriterias;
+import com.github.dandelion.datatables.core.ajax.DatatablesResponse;
+import com.github.dandelion.datatables.extras.spring3.ajax.DatatablesParams;
+
 @Controller
 public class AddressInfoController extends BaseController {
+
+    Logger logger = LoggerFactory.getLogger(AddressInfoController.class);
 
     @Resource
     AddressInfoService addressInfoService;
@@ -25,9 +36,9 @@ public class AddressInfoController extends BaseController {
     }
 
     @RequestMapping(value = "/edit_input/{id}", method = RequestMethod.GET)
-    public String editInput(Model model, @PathVariable String id) {
-        model.addAttribute("addressInfo", addressInfoService.get(id));
-        model.addAttribute("isEditInput", true);
+    public String editInput(Map<String, Object> model, @PathVariable String id) {
+        model.put("addressInfo", addressInfoService.get(id));
+        model.put("isEditInput", true);
         return "add_input";
     }
 
@@ -61,5 +72,18 @@ public class AddressInfoController extends BaseController {
     java.util.Map del(String[] ids) {
         addressInfoService.delete(ids);
         return ajax(Status.success, "删除成功!");
+    }
+
+    @RequestMapping(value = "/ajaxpagination")
+    public String findAllForDataTablesFullSpring(Model model, AddressInfo addressInfo) {
+        model.addAttribute("pages", addressInfoService.findAddressInfo(addressInfo));
+        return "pagination";
+    }
+
+    @RequestMapping(value = "/pagination")
+    public @ResponseBody
+    DatatablesResponse<AddressInfo> findAllForDataTablesFullSpring(@DatatablesParams DatatablesCriterias criterias) {
+        DataSet<AddressInfo> dataSet = addressInfoService.findPersonsWithDatatablesCriterias(criterias);
+        return DatatablesResponse.build(dataSet, criterias);
     }
 }

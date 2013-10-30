@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables" layout:decorator="common/layout/ajaxLayout">
 <head th:fragment="headerFragment">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.min.css"
+          th:href="@{/static/bootstrap/css/bootstrap-responsive.min.css}"/>
     <link rel="stylesheet" href="../static/base/css/base.css"
           th:href="@{/static/base/css/base.css}"/>
     <link rel="stylesheet" href="../static/base/css/index.css"
           th:href="@{/static/base/css/index.css}"/>
-    <script src="../static/common/js/jquery-1.7.2.min.js" th:src="@{/static/common/js/jquery-1.7.2.min.js}"/>
-    <script src="../static/common/js/jquery.validate.min.js" th:src="@{/static/common/js/jquery.validate.min.js}"/>
-    <script src="../static/common/js/jquery.form.min.js" th:src="@{/static/common/js/jquery.form.min.js}"/>
-    <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{/static/bootstrap/js/bootstrap.min.js}"/>
+    <script src="../static/common/js/jquery-1.8.3.min.js" th:src="@{/static/common/js/jquery-1.8.3.min.js}"></script>
+    <script src="../static/common/js/jquery.validate.min.js"
+            th:src="@{/static/common/js/jquery.validate.min.js}"></script>
+    <script src="../static/common/js/jquery.form.min.js" th:src="@{/static/common/js/jquery.form.min.js}"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+    <link href="../static/datatables/css/jquery.dataTables.css"
+          th:href="@{/static/datatables/css/jquery.dataTables.css}" rel="stylesheet"/>
+    <script src="../static/datatables/js/jquery.dataTables.js"
+            th:src="@{/static/datatables/js/jquery.dataTables.js}"></script>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="topFragment">
@@ -44,7 +54,8 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header">Sidebar</li>
-                    <li class="active"><a href="#" th:attr="href=@{/index}">联系方式</a></li>
+                    <li th:attr="class=${isFirstSide} ? 'active' : ''"><a href="#" th:attr="href=@{/index}">联系方式</a></li>
+                    <li th:attr="class=${isPagination} ? 'active' : ''"><a href="#" th:attr="href=@{/ajaxpagination}">分页</a></li>
                 </ul>
             </div>
             <!--/.well -->

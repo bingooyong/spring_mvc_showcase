@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragment/common :: headerFragment">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
           th:href="@{/static/bootstrap/css/bootstrap.min.css}"/>
@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
           th:href="@{/static/base/css/base.css}"/>
 </head>
-<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"/>
-<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"/>
+<script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"></script>
+<script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"></script>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3" th:include="fragment/common :: sidebarFragment"></div>
+        <div class="span3" th:with="isFirstSide='true'" th:include="fragment/common :: sidebarFragment"></div>
         <!--/span-->
         <div class="span9">
             <div class="row" id="listForm">
-                <div class="span12">
+                <div class="span9">
                     <div class="span5">
                         <form class="form-inline" method="post" action="#" th:object="${addressInfo}"
                               th:attr="action=@{/search}">
@@ -30,11 +30,11 @@
                             <button type="submit" class="btn" id="searchButton">搜索</button>
                         </form>
                     </div>
-                    <div class="span1 offset5">
+                    <div class="span1 offset2">
                         <button type="button" class="btn" id="addButton">新增</button>
                     </div>
                 </div>
-                <div class="span12">
+                <div class="span9">
                     <table class="table" id="listTable">
                         <thead>
                         <tr>
