@@ -1,7 +1,7 @@
 <html>
 <body>
 <%
-    response.sendRedirect("/mvc/index");
+    response.sendRedirect(request.getContextPath() + "/index");
 %>
 </body>
 </html>

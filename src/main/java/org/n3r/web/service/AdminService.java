@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     public Admin findAdmin(String username) {
-        return new Esql().selectFirst("findAdmin").useSqlFile("/org/n3r/web/service/AddressInfoService.esql").params(username).returnType(Admin.class).execute();
+        return new Esql().selectFirst("findAdmin").useSqlFile("/org/n3r/web/service/AddressInfoService.esql")
+                .params(username).returnType(Admin.class).execute();
     }
 }

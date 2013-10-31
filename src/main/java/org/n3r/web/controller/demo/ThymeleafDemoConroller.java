@@ -3,7 +3,6 @@ package org.n3r.web.controller.demo;
 import java.util.Map;
 
 import org.n3r.core.lang.RDate;
-import org.n3r.web.controller.demo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

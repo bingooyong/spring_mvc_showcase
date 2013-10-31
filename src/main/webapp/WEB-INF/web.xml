@@ -43,6 +43,18 @@
         <servlet-name>simplemvc</servlet-name>
     </filter-mapping>
 
+    <!-- Dandelion-Datatables servlet definition -->
+    <servlet>
+        <servlet-name>datatablesController</servlet-name>
+        <servlet-class>com.github.dandelion.datatables.extras.servlet2.servlet.DatatablesServlet</servlet-class>
+    </servlet>
+
+    <!-- Dandelion-Datatables servlet mapping -->
+    <servlet-mapping>
+        <servlet-name>datatablesController</servlet-name>
+        <url-pattern>/datatablesController/*</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>simplemvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

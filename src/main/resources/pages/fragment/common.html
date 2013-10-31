@@ -54,8 +54,10 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li class="nav-header">Sidebar</li>
-                    <li th:attr="class=${isFirstSide} ? 'active' : ''"><a href="#" th:attr="href=@{/index}">联系方式</a></li>
-                    <li th:attr="class=${isPagination} ? 'active' : ''"><a href="#" th:attr="href=@{/ajaxpagination}">分页</a></li>
+                    <li th:attr="class=${isFirstSide} ? 'active' : ''"><a href="#" th:attr="href=@{/index}">联系方式</a>
+                    </li>
+                    <li th:attr="class=${isPagination} ? 'active' : ''"><a href="#"
+                                                                           th:attr="href=@{/ajaxpagination}">分页</a></li>
                 </ul>
             </div>
             <!--/.well -->
