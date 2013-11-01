@@ -8,15 +8,15 @@ FROM mvc_address_infos
 WHERE id = ##
 
 [onSaveAddressInfo]
-INSERT INTO MVC_ADDRESS_INFOS (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);
+INSERT INTO MVC_ADDRESS_INFO (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);
 
 [onUpdateAddressInfo]
-UPDATE MVC_ADDRESS_INFOS
+UPDATE MVC_ADDRESS_INFO
 SET name = #name#, email = #email#, phone = #phone#
 WHERE id = #id#
 
 [onDeleteAddressInfo]
-DELETE from MVC_ADDRESS_INFOS WHERE ID = ##;
+DELETE from MVC_ADDRESS_INFO WHERE ID = ##;
 
 [findAddressInfo]
 SELECT
@@ -24,7 +24,7 @@ SELECT
   name,
   email,
   phone
-FROM MVC_ADDRESS_INFOS
+FROM MVC_ADDRESS_INFO
 WHERE 1 = 1
 <#dynamic>
   <#if id?has_content>   and id = #id#</#if>
@@ -39,7 +39,7 @@ SELECT
   name,
   email,
   phone
-FROM MVC_ADDRESS_INFOS;
+FROM MVC_ADDRESS_INFO;
 
 
 [findPageAddressInfo]
@@ -48,7 +48,7 @@ SELECT
   name,
   email,
   phone
-FROM MVC_ADDRESS_INFOS
+FROM MVC_ADDRESS_INFO
 WHERE 1 = 1
 <#dynamic>
   <#list columnDefs as columnDef>
