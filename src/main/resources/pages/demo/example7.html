@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <br/>
+
+    <div class="span10 offset1">
+            <span class="alert alert-success"
+                  th:text="${'User login : '+sec.principal.username}">User login : foo bar</span>
+        <br/><br/>
+            <span class="alert alert-success"
+                  th:text="${'User authorities : '+ #strings.listJoin(sec.principal.authorities,',')}">User authorities : simple user</span>
+    </div>
+</div>
+
+</body>
+</html>

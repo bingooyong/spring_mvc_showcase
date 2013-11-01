@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <br/>
+
+
+    <h2>selection</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr class="center middle">
+            <th>#</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>nationality</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user,rowStat : ${listArtits.?[isLocked == true]}">
+            <td class="center middle" th:text="${rowStat.count}">1</td>
+            <td class="center middle" th:text="${user.firstName}">Lv</td>
+            <td class="center middle" th:text="${user.lastName}">Yong</td>
+            <td class="center middle" th:text="${user.nationality}">Cuc
+            </td>
+        </tr>
+        <tr th:remove="all">
+            <td class="center middle">2</td>
+            <td class="center middle">Hu Hu</td>
+            <td class="center middle">Hang Hang...</td>
+            <td class="center middle">Beijing</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br/><br/>
+
+    <h2>projection</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr class="center middle">
+            <th class="center middle">#</th>
+            <th class="center middle">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user,rowStat : ${listArtits.![firstName + ' '+ lastName]}">
+            <td class="center middle" th:text="${rowStat.count}">1</td>
+            <td class="center middle" th:text="${user}">Michael Jackson</td>
+        </tr>
+        <tr th:remove="all">
+            <td class="center middle">2</td>
+            <td class="center middle">Madonna</td>
+        </tr>
+        <tr th:remove="all">
+            <td class="center middle">3</td>
+            <td class="center middle">Elton John</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <span th:text="@{${small.res('/test/css/a.js')}}"></span>
+
+</div>
+
+</body>
+</html>

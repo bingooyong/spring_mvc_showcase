@@ -11,10 +11,10 @@
 <script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"></script>
 <script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"></script>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top" th:include="fragment/common :: topFragment"></div>
+<div th:include="fragment/layout/navbar::navbar" th:remove="tag"></div>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3" th:include="fragment/common :: sidebarFragment"></div>
+        <div class="span3" th:with="isFirstSide='true'" th:include="fragment/layout/sidebar :: sidebar"></div>
         <!--/span-->
         <div class="span9">
             <form id="addForm" class="form-horizontal" method="post" action="#"

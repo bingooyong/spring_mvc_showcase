@@ -5,6 +5,7 @@ import org.n3r.config.Config;
 import org.springframework.stereotype.Component;
 
 @Component
+@SmallFunctionTag("small")
 public class SmallFunctions {
 
     /**

@@ -2,6 +2,7 @@ package org.n3r.web.config;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
+import org.n3r.web.thymeleaf.expression.SmallFunctionHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring3.SpringTemplateEngine;
@@ -40,6 +41,8 @@ public class ViewConfiguration {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setCharacterEncoding("utf-8");
+
+        SmallFunctionHelper.addSmallFunctionTag(viewResolver);
         return viewResolver;
     }
 

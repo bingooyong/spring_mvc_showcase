@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <br/>
+
+    <div class="well">
+        <h2> Bean references &amp; method invocation</h2>
+        <span th:text="'Nginx Res Url is : ' + ${beans.smallFunctions.res('/static/css/demo.css')}"></span>
+
+
+        <h2> Static fields &amp; methods</h2>
+        <span th:text="${'The application name is : ' + T(org.n3r.web.common.Constants).APP_NAME}"></span>
+
+
+        <h2> Small Functions</h2>
+        <span th:text="${'The application name is : ' + small.res('/static/css/demo.css')}"></span>
+    </div>
+
+</div>
+
+</body>
+</html>

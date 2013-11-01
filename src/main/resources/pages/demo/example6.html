@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <br/>
+
+    <div class="well">
+
+        <h2>th:inline</h2>
+        <span th:inline="text">[[${'Nginx Res Url is : ' + beans.smallFunctions.res('/static/css/demo.css')}]]</span>
+
+        <h2>th:text</h2>
+        <span th:text="'Nginx Res Url is : ' + ${beans.smallFunctions.res('/static/css/demo.css')}"></span>
+    </div>
+
+    <div class="well">
+
+        <div>
+            <button id="actionButton" type="button" onclick="displayApplicationName();">Get Application name</button>
+            <br/><br/>
+            <span id="displaySpan">Application name : </span>
+        </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+
+            var applicationName = /*[[${T(org.n3r.web.common.Constants).APP_NAME}]]*/ "Test";
+
+            function displayApplicationName() {
+                document.getElementById('displaySpan').innerHTML = 'Application name : ' + applicationName;
+            }
+            /*]]>*/
+        </script>
+    </div>
+</div>
+
+</body>
+</html>

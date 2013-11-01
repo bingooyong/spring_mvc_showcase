@@ -23,6 +23,11 @@
     <!-- 把标记了@Controller注解的类转换为bean -->
     <context:component-scan base-package="org.n3r.web"/>
 
+    <mvc:interceptors>
+        <bean class="org.n3r.web.interceptor.SecurityInterceptor"/>
+    </mvc:interceptors>
+
+
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <!-- Turn off working out content type based on URL file extension, should fall back to looking at the Accept headers -->
         <property name="favorPathExtension" value="false"/>
