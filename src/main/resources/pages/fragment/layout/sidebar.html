@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div th:fragment="sidebar">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+            <li class="nav-header">Sidebar</li>
+            <li th:attr="class=${isFirstSide} ? 'active' : ''"><a th:attr="href=@{/index}">联系方式</a></li>
+            <li th:attr="class=${isPagination} ? 'active' : ''"><a th:attr="href=@{/ajaxpagination}">分页</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

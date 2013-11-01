@@ -77,6 +77,7 @@ public class AddressInfoController extends BaseController {
     @RequestMapping(value = "/ajaxpagination")
     public String findAllForDataTablesFullSpring(Model model, AddressInfo addressInfo) {
         model.addAttribute("pages", addressInfoService.findAddressInfo(addressInfo));
+        model.addAttribute("isPagination", true);
         return "pagination";
     }
 

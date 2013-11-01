@@ -19,11 +19,12 @@ public class AddressInfoService extends BaseServiceImpl<AddressInfo, String> {
     }
 
     public List<AddressInfo> findAllAddressInfo() {
-        return new Esql().select("findAllAddressInfo").returnType(AddressInfo.class).execute();
+        return new Esql().select("findAllAddressInfo").returnType(AddressInfo.class).limit(100).execute();
     }
 
     public List<AddressInfo> findAddressInfo(AddressInfo addressInfo) {
-        return new Esql().select("findAddressInfo").returnType(AddressInfo.class).params(addressInfo).execute();
+        return new Esql().select("findAddressInfo").returnType(AddressInfo.class).params(addressInfo).limit(100)
+                .execute();
     }
 
     public DataSet<AddressInfo> findPersonsWithDatatablesCriterias(DatatablesCriterias criterias) {
