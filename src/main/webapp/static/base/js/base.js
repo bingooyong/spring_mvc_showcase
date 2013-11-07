@@ -75,7 +75,7 @@ $(function () {
 
         $editButton.click(function () {
             var id = $(this).parents("tr").find("input[name='ids']").val();
-            window.location.href = "edit_input/" + id;
+            window.location.href = SimpleMVC.editAction + "/" + id;
         })
 
         // 查找

@@ -5,6 +5,8 @@
       layout:decorator="fragment/layout/mainLayout">
 
 <head>
+    <script th:src="@{/static/base/js/base.js}"></script>
+    <script th:src="@{/static/base/js/index.js}"></script>
     <script th:src="@{/static/common/js/jquery.pager.js}"></script>
     <style>
 
@@ -73,7 +75,7 @@
 <body>
 <div layout:fragment="content" th:remove="tag">
     <form id="listForm" class="form-inline" method="post" action="#" th:object="${addressInfo}"
-          th:attr="action=@{/example8}">
+          th:attr="action=@{/pageDemo/simple}">
         <div class="row">
             <div class="span9">
                 <div class="span5">

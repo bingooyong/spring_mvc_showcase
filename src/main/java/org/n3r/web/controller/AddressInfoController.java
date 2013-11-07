@@ -89,10 +89,5 @@ public class AddressInfoController extends BaseController {
         return DatatablesResponse.build(dataSet, criterias);
     }
 
-    @RequestMapping(value = "/example8", method = { RequestMethod.GET, RequestMethod.POST })
-    public String example8(Model model, AddressInfo addressInfo, EqlPage eqlPage) {
-        eqlPage.setPageRows(10);
-        model.addAttribute("pages", addressInfoService.findPage(addressInfo, eqlPage));
-        return "demo/example8";
-    }
+
 }

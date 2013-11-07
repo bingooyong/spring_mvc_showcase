@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css"
           th:href="@{/static/base/css/base.css}"/>
 </head>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    if (!this.SimpleMVC) {
+        this.SimpleMVC = {};
+        SimpleMVC.contextPath = /*[[@{'/'}]]*/"/test";
+        SimpleMVC.editAction = /*[[@{'/edit_input'}]]*/"/test";
+    }
+    /*]]>*/
+</script>
 <script src="../static/base/js/base.js" th:src="@{/static/base/js/base.js}"></script>
 <script src="../static/base/js/index.js" th:src="@{/static/base/js/index.js}"></script>
 <body>
