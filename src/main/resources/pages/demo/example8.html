@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+
+<head>
+    <script th:src="@{/static/common/js/jquery.pager.js}"></script>
+    <style>
+
+        .list .pagerBar {
+            height: 30px;
+            line-height: 30px;
+            padding: 3px 8px;
+            clear: both;
+            border-bottom: 1px solid #d8deea;
+            background-color: #e9f0f4;
+        }
+
+        .list .pagerBar .delete {
+            float: left;
+        }
+
+        .list .pagerBar .pager {
+            float: right;
+            padding-top: 5px;
+        }
+
+        .list #pager .pages {
+            float: right;
+            font-size: 12px;
+            text-transform: uppercase;
+            border: none;
+        }
+
+        .list #pager .pages li {
+            line-height: 16px;
+            float: left;
+            padding: 2px 5px;
+            margin-left: 5px;
+            cursor: pointer;
+            border: 1px solid #cccccc;
+        }
+
+        .list #pager .pages li:hover {
+            border: 1px solid #003f7e;
+        }
+
+        .list #pager .pages .pgEmpty {
+            color: #cfcfcf;
+            padding: 2px 5px;
+            cursor: default;
+            border: 1px solid #cfcfcf;
+        }
+
+        .list #pager .pages .pgCurrent {
+            color: #00000;
+            font-weight: bold;
+            border: 1px solid #003f7e;
+            background-color: #eeeeee;
+        }
+
+        .list .noRecord {
+            height: 30px;
+            line-height: 30px;
+            clear: both;
+            color: red;
+            text-align: center;
+            border-bottom: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <form id="listForm" class="form-inline" method="post" action="#" th:object="${addressInfo}"
+          th:attr="action=@{/example8}">
+        <div class="row">
+            <div class="span9">
+                <div class="span5">
+
+                    <input type="text" class="input-small" th:field="*{name}" placeholder="姓名" name="name"/>
+                    <input type="text" class="input-small" th:field="*{email}" placeholder="Email"
+                           name="email"/>
+                    <input type="text" class="input-small" th:field="*{phone}" placeholder="手机号码"
+                           name="phone"/>
+                    <button type="submit" class="btn" id="searchButton">搜索</button>
+
+                </div>
+                <div class="span1 offset2">
+                    <button type="button" class="btn" id="addButton">新增</button>
+                </div>
+            </div>
+            <div class="span9 list">
+                <table class="table" id="listTable">
+                    <thead>
+                    <tr>
+                        <th class="center middle"><input type="checkbox" class="allCheck"/></th>
+                        <th class="center middle">姓名</th>
+                        <th class="center middle">邮箱</th>
+                        <th class="center middle">手机号码</th>
+                        <th class="center middle">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="addressInfo : ${pages}">
+                        <td class="center middle">
+                            <input type="checkbox" name="ids" value="" th:value="${addressInfo.id}"/>
+                        </td>
+                        <td class="center middle" th:text="${addressInfo.name}">Michael Jackson</td>
+                        <td class="center middle" th:text="${addressInfo.email}">1@1.com</td>
+                        <td class="center middle" th:text="${addressInfo.phone}">186xxxx2514</td>
+                        <td class="center middle">
+                            <button class="btn btn-link editButton">编辑</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--/table-->
+
+                <div th:include="fragment/layout/pager::pager" th:remove="tag"></div>
+
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+    </form>
+</div>
+
+</body>
+</html>

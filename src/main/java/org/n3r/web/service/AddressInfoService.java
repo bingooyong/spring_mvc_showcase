@@ -37,4 +37,8 @@ public class AddressInfoService extends BaseServiceImpl<AddressInfo, String> {
                 page.getTotalRows()));
     }
 
+    public List<AddressInfo> findPage(AddressInfo addressInfo, EqlPage eqlPage) {
+        return new Eql().select("findAddressInfo").returnType(AddressInfo.class).params(addressInfo).limit(eqlPage)
+                .execute();
+    }
 }

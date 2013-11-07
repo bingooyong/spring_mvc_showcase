@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+<head>
+    <script th:src="@{/static/base/js/base.js}"></script>
+    <script th:src="@{/static/base/js/index.js}"></script>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function actions(data, type, full) {
+            return '<a class="btn btn-mini" href="/delete/' + full.id + '">Delete data</a>'
+                    + '<a class="btn btn-mini" href="/edit_input/' + full.id + '">Edit data</a>';
+        }
+
+        $(function () {
+            $("input[name='searchButton']").click(function () {
+                var name = $("input[name='nameFilter']").val();
+                oTable_listTable.fnFilter(name);
+            })
+        })
+
+        /*]]>*/
+    </script>
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>Pipelining data for paging</h3>
+            <br/>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <form class="form-inline">
+                <fieldset>
+                    <legend>Search form</legend>
+                    <input type="text" name="nameFilter"/>
+                    <input type="text" name="emailFilter"/>
+                    <input type="text" name="phoneFilter"/>
+                    <input type="button" name="searchButton" value="查询"/>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <table id="listTable"
+           dt:table="true" dt:url="@{/pagination}"
+           dt:theme="bootstrap2" class="table table-striped"
+           dt:serverside="true"
+           dt:processing="true"
+           dt:filter="true">
+        <thead>
+        <tr>
+            <th dt:property="'id'">Id</th>
+            <th dt:property="'name'">姓名</th>
+            <th dt:property="'email'">邮箱</th>
+            <th dt:property="'phone'">联系电话</th>
+            <th dt:renderFunction="'actions'"></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+</body>
+</html>

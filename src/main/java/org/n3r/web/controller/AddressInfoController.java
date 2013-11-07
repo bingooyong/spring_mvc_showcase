@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.n3r.eql.EqlPage;
 import org.n3r.web.entity.AddressInfo;
 import org.n3r.web.service.AddressInfoService;
 import org.slf4j.Logger;
@@ -86,5 +87,12 @@ public class AddressInfoController extends BaseController {
     DatatablesResponse<AddressInfo> findAllForDataTablesFullSpring(@DatatablesParams DatatablesCriterias criterias) {
         DataSet<AddressInfo> dataSet = addressInfoService.findPersonsWithDatatablesCriterias(criterias);
         return DatatablesResponse.build(dataSet, criterias);
+    }
+
+    @RequestMapping(value = "/example8", method = { RequestMethod.GET, RequestMethod.POST })
+    public String example8(Model model, AddressInfo addressInfo, EqlPage eqlPage) {
+        eqlPage.setPageRows(10);
+        model.addAttribute("pages", addressInfoService.findPage(addressInfo, eqlPage));
+        return "demo/example8";
     }
 }

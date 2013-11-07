@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+<head>
+    <script th:src="@{/static/base/js/base.js}"></script>
+    <script th:src="@{/static/base/js/index.js}"></script>
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function actions(data, type, full) {
+            return '<a class="btn btn-mini" href="/delete/' + full.id + '">Delete data</a>'
+                    + '<a class="btn btn-mini" href="/edit/' + full.id + '">Edit data</a>';
+        }
+        var myPredefinedValues = ['Val1', 'Val2', 'Val3'];
+        /*]]>*/
+    </script>
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>Pipelining data for paging</h3>
+            <br/>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <form class="form-inline">
+                <fieldset>
+                    <legend>Search form</legend>
+                    <div id="nameFilter" class="span2"></div>
+                    <div id="emailFilter" class="span2 offset1"></div>
+                    <div id="phoneFilter" class="span2 offset1"></div>
+
+                    <div id="" class="span2 offset1"></div>
+
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <table id="listTable"
+           dt:table="true" dt:url="@{/pagination}"
+           dt:theme="bootstrap2" class="table table-striped"
+           dt:serverside="true"
+           dt:processing="true">
+        <thead>
+        <tr>
+            <th dt:property="'id'">Id</th>
+            <th dt:property="'name'" dt:filterable="true" dt:selector="'#nameFilter'">姓名</th>
+            <th dt:property="'email'" dt:filterable="true" dt:selector="'#emailFilter'">邮箱</th>
+            <th dt:property="'phone'" dt:filterable="true" dt:filterType="select"
+                dt:filterValues="'myPredefinedValues'">
+                联系电话
+            </th>
+            <th dt:renderFunction="'actions'"></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+</body>
+</html>

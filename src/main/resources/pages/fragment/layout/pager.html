@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div th:fragment="pager">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $().ready(function () {
+            var $pageNumber = $("#currentPage");// 当前页码
+            var $pageSize = $("#pageRows");// 每页显示数
+            var $pager = $("#pager");
+            var $startIndex = $("#startIndex"); // 当前页码
+            var listFormSelector = /*[[${#objects.nullSafe(listFormSelector,"#listForm")}]]*/ "listForm";
+            var $listForm = $(listFormSelector); // 列表表单
+            $pager.pager({
+                pagenumber: /*[[${eqlPage.currentPage}]]*/ 1,
+                pagecount: /*[[${eqlPage.totalPages}]]*/ 1,
+                buttonClickCallback: function (id) {
+                    $pageNumber.val(id);
+                    $startIndex.val($pageSize.val() <= 0 ? 0 : ($pageNumber.val() - 1) * $pageSize.val());
+                    $listForm.submit();
+                }
+            });
+        })
+        /*]]>*/
+    </script>
+
+    <div class="pagerBar">
+        <span th:text="${'总计:' + eqlPage.totalPages + '页'}"></span>
+
+        <div class="pager">
+            <span id="pager"></span>
+            <input type="hidden" name="startIndex" id="startIndex" th:value="${eqlPage.startIndex}"/>
+            <input type="hidden" name="pageRows" id="pageRows" th:value="${eqlPage.pageRows}"/>
+            <input type="hidden" name="currentPage" id="currentPage" th:value="${eqlPage.currentPage}"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
