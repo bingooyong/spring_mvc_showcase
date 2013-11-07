@@ -19,7 +19,7 @@ import com.google.common.collect.Lists;
 
 @Controller
 @RequestMapping("/demo")
-public class ThymeleafDemoConroller {
+public class DemoController {
 
     private Object results;
 

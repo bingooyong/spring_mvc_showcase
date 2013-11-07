@@ -1,0 +1,74 @@
+-- [onGetAddressInfo]
+SELECT
+  id,
+  name,
+  email,
+  phone
+FROM MVC_ADDRESS_INFO
+WHERE id = ##
+
+      -- [onSaveAddressInfo]
+      INSERT
+INTO MVC_ADDRESS_INFO (ID, NAME, EMAIL, PHONE) VALUES (#id#, #name#, #email#, #phone#);
+
+-- [onUpdateAddressInfo]
+UPDATE MVC_ADDRESS_INFO
+SET NAME = #name#, email = #email#, phone = #phone#
+WHERE id = #id#
+
+-- [onDeleteAddressInfo]
+DELETE FROM MVC_ADDRESS_INFO WHERE ID = ##;
+
+-- [findAddressInfo]
+SELECT
+id,
+NAME,
+email,
+phone
+FROM MVC_ADDRESS_INFO
+WHERE 1 = 1
+-- isNotEmpty id
+AND id = #id#
+-- end
+-- isNotEmpty name
+AND NAME LIKE concat('%', #name#, '%')
+-- end
+-- isNotEmpty email
+AND email LIKE concat('%', #email#,'%')
+-- end
+-- isNotEmpty phone
+AND phone LIKE concat('%', #phone#,'%')
+-- end
+
+
+-- [findAllAddressInfo]
+SELECT
+id,
+NAME,
+email,
+phone
+FROM MVC_ADDRESS_INFO;
+
+
+-- [findPageAddressInfo]
+SELECT
+id,
+NAME,
+email,
+phone
+FROM MVC_ADDRESS_INFO
+WHERE 1 = 1
+-- for item=columnDef collection=columnDefs
+  -- isNotEmpty columnDef.search
+     AND $columnDef.name$ LIKE concat('%',#columnDef.search#, '%')
+  -- end
+-- end
+
+-- for item=sortingColumnDef index=index collection=sortingColumnDefs open='order by' separator=' ' close=''
+  -- isNotEmpty sortingColumnDef.sortDirection
+        $sortingColumnDef.name$ $sortingColumnDef.sortDirection$
+  -- end
+-- end
+
+
+

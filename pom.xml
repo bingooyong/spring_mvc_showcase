@@ -175,6 +175,12 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.n3r</groupId>
+            <artifactId>eql</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
         <!-- Validator -->
         <dependency>
             <groupId>javax.validation</groupId>

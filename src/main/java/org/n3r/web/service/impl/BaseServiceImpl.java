@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.n3r.core.lang.RClose;
-import org.n3r.esql.Esql;
-import org.n3r.esql.EsqlTran;
+import org.n3r.eql.Eql;
+import org.n3r.eql.EqlTran;
 import org.n3r.web.common.utils.UUIDUtils;
 import org.n3r.web.entity.AddressInfo;
 import org.n3r.web.entity.BaseEntity;
@@ -34,7 +34,7 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     @Override
     public T get(PK id) {
         Assert.notNull(id, "id is required");
-        return new Esql().useSqlFile(getClass())
+        return new Eql().useSqlFile(getClass())
                 .selectFirst(BaseEntity.ON_GET_METHOD_NAME + entityClass.getSimpleName())
                 .params(id)
                 .returnType(AddressInfo.class)
@@ -66,7 +66,7 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
             Throwables.propagate(e);
             return null;
         }
-        new Esql().useSqlFile(getClass())
+        new Eql().useSqlFile(getClass())
                 .update(BaseEntity.ON_SAVE_METHOD_NAME + entity.getClass().getSimpleName())
                 .params(entity).execute();
         return (PK) ((BaseEntity) entity).getId();
@@ -74,7 +74,7 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
 
     @Override
     public void update(T entity) {
-        new Esql().useSqlFile(getClass())
+        new Eql().useSqlFile(getClass())
                 .update(BaseEntity.ON_UPDATE_METHOD_NAME + entity.getClass().getSimpleName())
                 .params(entity).execute();
 
@@ -87,7 +87,7 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     @Override
     public void delete(PK id) {
         Assert.notNull(id, "id is required");
-        new Esql().useSqlFile(getClass())
+        new Eql().useSqlFile(getClass())
                 .update(BaseEntity.ON_DELETE_METHOD_NAME + entityClass.getSimpleName())
                 .params(id).execute();
     }
@@ -95,12 +95,12 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     @Override
     public void delete(PK[] ids) {
         Assert.notEmpty(ids, "ids must not be empty");
-        Esql esql = new Esql().useSqlFile(getClass());
-        EsqlTran tran = esql.newTran();
+        Eql eql = new Eql().useSqlFile(getClass());
+        EqlTran tran = eql.newTran();
         try {
             tran.start();
             for (PK id : ids) {
-                esql.update(BaseEntity.ON_DELETE_METHOD_NAME + entityClass.getSimpleName()).params(id).execute();
+                eql.update(BaseEntity.ON_DELETE_METHOD_NAME + entityClass.getSimpleName()).params(id).execute();
             }
             tran.commit();
         } catch (Exception ex) {

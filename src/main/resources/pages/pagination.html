@@ -9,6 +9,14 @@
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function actions(data, type, full) {
+            return '<a class="btn btn-mini" href="/delete/' + full.id + '">Delete data</a>'
+                    + '<a class="btn btn-mini" href="/edit/' + full.id + '">Edit data</a>';
+        }
+        /*]]>*/
+    </script>
     <div class="row-fluid">
         <div class="span12">
             <h3>Pipelining data for paging</h3>
@@ -39,6 +47,7 @@
             <th dt:property="'name'" dt:filterable="true" dt:selector="'#nameFilter'">姓名</th>
             <th dt:property="'email'" dt:filterable="true" dt:selector="'#emailFilter'">邮箱</th>
             <th dt:property="'phone'" dt:filterable="true" dt:selector="'#phoneFilter'">联系电话</th>
+            <th dt:renderFunction="'actions'"></th>
         </tr>
         </thead>
     </table>

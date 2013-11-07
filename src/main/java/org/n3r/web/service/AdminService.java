@@ -1,6 +1,6 @@
 package org.n3r.web.service;
 
-import org.n3r.esql.Esql;
+import org.n3r.eql.Eql;
 import org.n3r.web.entity.Admin;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     public Admin findAdmin(String username) {
-        return new Esql().selectFirst("findAdmin").useSqlFile("/org/n3r/web/service/AddressInfoService.esql")
-                .params(username).returnType(Admin.class).execute();
+        return new Eql().selectFirst("findAdmin").params(username).returnType(Admin.class).execute();
     }
 }

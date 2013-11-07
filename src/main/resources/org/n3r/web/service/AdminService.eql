@@ -1,4 +1,4 @@
-[findAdmin]
+-- [findAdmin]
 SELECT
   username,
   password,
