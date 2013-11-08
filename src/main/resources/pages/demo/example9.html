@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="fragment/layout/mainLayout">
+
+<head>
+    <script th:src="@{/static/base/js/base.js}"></script>
+    <script th:src="@{/static/base/js/index.js}"></script>
+    <script th:src="@{/static/common/js/jquery.ajaxpager.js}"></script>
+    <script th:src="@{/static/common/js/jquery.ajaxpager.js}"></script>
+    <script>
+        $(function () {
+            $("#pageTable").ajaxpager({
+                formSelector: "#DemoPageForm"
+            });
+        })
+    </script>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <form id="DemoPageForm" class="form-inline" method="post" action="#" th:object="${addressInfo}"
+          th:attr="action=@{/pageDemo/ajaxQuery}">
+        <div class="row">
+            <div class="span9">
+                <div class="span5">
+
+                    <input type="text" class="input-small" th:field="*{name}" placeholder="姓名" name="name"/>
+                    <input type="text" class="input-small" th:field="*{email}" placeholder="Email"
+                           name="email"/>
+                    <input type="text" class="input-small" th:field="*{phone}" placeholder="手机号码"
+                           name="phone"/>
+                    <button type="submit" class="btn" id="searchButton">搜索</button>
+
+                </div>
+                <div class="span1 offset2">
+                    <button type="button" class="btn" id="addButton">新增</button>
+                </div>
+            </div>
+            <div class="span9 list">
+                <div id="pageTable"/>
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+    </form>
+</div>
+
+</body>
+</html>

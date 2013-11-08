@@ -1,0 +1,33 @@
+/*新分页样式 begin*/
+.tableTitle{width:808px;height:31px;text-align:center;border:#e6f0f5 solid 1px; background-color:#e6f0f5;}
+.tableTitle td{border-right:1px solid #fff;border-top:1px solid #fff;border-collapse:collapse;line-height:31px;}
+.tableTitleBtm{width:808px;height:31px;border:#e6f0f5 solid 1px; background-color:#fff;}
+.tableBtmTitle{width:808px;height:30px;margin-top:1px; background-color:#e6f0f5;}
+.tableBtmTitleNew{background-color:#f6f9fb;}
+.pagingNew{padding-top:4px;display:block; float:right;}
+.pagingNew a{float:left;display:inline-block;height:20px;padding: 0 4px;text-align:center;color:#36c;font-weight:bold;margin-right:5px;}
+.pagingNew a:hover{text-decoration:none;}
+.pagingNew label{float:left;padding:2px 5px 0 0;}
+.pagingNew label.marginTop2px{padding-top:2px;line-height: 22px;}
+.pagingNew input{display:block;float:left;margin:1px 5px 0 0;}
+.pagingNew a.pagingSelect{background:#39c;color:#fff; font-weight:bold;padding:0px 7px 0px;border:1px solid #d7d7d7;margin-top: -1px;}
+.pagingNew a.hidingInfor{height:20px;border:0;background:transparent;}
+.totalRecord {float: right;margin: 6px 10px 0px 0;line-height: 22px;*line-height: 20px;}
+/*跳转按钮样式*/
+.pagingNew a.determineBtn{width:39px;height:22px;line-height:22px;*line-height:24px;text-align:center;padding:0;margin:2px 10px 0 0;border:0;font-weight:100;color:#333;background:url(../img/backstageAllButton.png) -329px 0px no-repeat;}
+.pagingNew a.determineBtn:hover{background-position:-329px -23px;}
+/*输入框样式*/
+.inputW20H18{width:20px;height:18px;line-height:18px;}
+/*上一页 默认 滑过 到头样式*/
+.pagingNew a.prevPage{width:12px;height:20px;line-height:20px;color:#36c;background:url(../img/paging.png) 6px -20px no-repeat;border:0;font-weight:bold;}
+.pagingNew a.prevPage:hover{ }
+.pagingNew a.prevEnd{background-position:6px 3px;}
+/*下一页 默认 滑过 到头样式*/
+.pagingNew a.nextPage{width:8px;height:20px;line-height:20px;color:#36c;background:url(../img/paging.png) -14px 3px no-repeat;border:0;font-weight:bold;}
+.pagingNew a.nextPage:hover{ }
+.pagingNew a.nextEnd{background-position:-14px -20px;}
+/*每页条数*/
+.pagingNew span{float:left;height:20px;margin:0px 5px 0 0;line-height: 22px;}
+.pagingNum {height:22px;padding:1px;width:52px;float:left;margin-top: -1px;}
+.inputW20H18 {width: 20px;height: 18px;line-height: 18px;}
+/*新分页样式 end*/

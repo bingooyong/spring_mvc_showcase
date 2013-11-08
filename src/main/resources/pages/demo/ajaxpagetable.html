@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table class="table" id="listTable">
+    <thead>
+    <tr>
+        <th class="center middle"><input type="checkbox" class="allCheck"/></th>
+        <th class="center middle">姓名</th>
+        <th class="center middle">邮箱</th>
+        <th class="center middle">手机号码</th>
+        <th class="center middle">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="addressInfo : ${pages}">
+        <td class="center middle">
+            <input type="checkbox" name="ids" value="" th:value="${addressInfo.id}"/>
+        </td>
+        <td class="center middle" th:text="${addressInfo.name}">Michael Jackson</td>
+        <td class="center middle" th:text="${addressInfo.email}">1@1.com</td>
+        <td class="center middle" th:text="${addressInfo.phone}">186xxxx2514</td>
+        <td class="center middle">
+            <button class="btn btn-link editButton">编辑</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--/table-->
+<div th:include="fragment/layout/ajaxpager::ajaxpager" th:with="ajaxPageId='DemoPageForm'"
+     th:remove="tag"></div>
+</body>
+</html>

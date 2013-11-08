@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div th:fragment="ajaxpager">
+
+    <link rel="stylesheet" th:href="@{/static/base/css/pager.css}"/>
+    <div class="tableTitle" th:id="${#objects.nullSafe(ajaxPageId,'_ajaxPage') + 'Id'}">
+            <span class="pagingNew">
+                <input type="hidden" name="totalRows" th:value="${eqlPage.totalRows}"/>
+                <input type="hidden" name="totalPages" th:value="${eqlPage.TotalPages}"/>
+                <input type="hidden" name="startIndex" th:value="${eqlPage.startIndex}"/>
+                <input type="hidden" name="currentPage" th:value="${eqlPage.currentPage}"/>
+                <input type="hidden" name="pageRows" th:value="${eqlPage.pageRows}"/>
+                <label>
+                    <span>每页</span>
+                    <span>
+                        <select class="pagingNum" th:id="${#objects.nullSafe(ajaxPageId,'ajaxPageRows') + 'Select'}">
+                            <option th:each="pageRows : ${T(org.n3r.web.common.PageRowsEnum).values()}"
+                                    th:value="${pageRows.value}"
+                                    th:text="${pageRows.value}"
+                                    th:selected="${pageRows.value == eqlPage.pageRows}">
+                            </option>
+                        </select>
+                    </span>
+                    <span>条</span>
+                </label>
+
+                <a class="prevEnd prevPage" title='上一页' th:if="${eqlPage.currentPage} == 1"></a>
+                <a class="prevPage" title='上一页' th:if="${eqlPage.currentPage} != 1"></a>
+
+                <label th:id="${#objects.nullSafe(ajaxPageId,'_ajaxPage') + 'PageNum'}"></label>
+
+                <a class="nextPage nextEnd" title='下一页' th:if="${eqlPage.currentPage == eqlPage.totalPages}"></a>
+                <a class="nextPage" title='下一页' th:if="${eqlPage.currentPage != eqlPage.totalPages}"></a>
+
+                <label class="marginTop4" th:text="${'共 ' + eqlPage.totalPages + ' 页'}"/>
+                <label class="marginTop4">跳转至</label>
+                  <input type="text" class="inputW20H18" th:value="${eqlPage.currentPage}"
+                         th:id="${#objects.nullSafe(ajaxPageId,'_ajaxPage') + 'IdInputPageNo'}"/>
+                <label class="marginTop4">页</label>
+                <a href="javascript:void(0);" class="determineBtn"
+                   th:id="${#objects.nullSafe(ajaxPageId,'_ajaxPage') + 'IdDetermineBtn'}">确定</a>
+            </span>
+        <label class="totalRecord">共<font class="font" th:text="${eqlPage.totalRows}"/>条</label>
+    </div>
+</div>
+</body>
+</html>
